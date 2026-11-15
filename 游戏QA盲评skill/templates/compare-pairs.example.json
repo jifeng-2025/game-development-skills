@@ -1,0 +1,11 @@
+{
+  "$comment": "target vs actual 对照清单。左边是目标图（画面目标图 / UI 参考稿截图），右边是本轮 evidence 里的截图。路径为绝对路径；换项目只改路径。以下为墨刃 Q001 实际用过的 8 组。",
+  "scene-vs-target-a": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/concepts/env-courtyard-ingame/env-courtyard-ingame__topdown__v03.png", "/ABS/evidence/qa/Q00N/full-2/012-hud-first-fight.png"],
+  "scene-vs-target-b": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/concepts/env-courtyard-ingame/env-courtyard-ingame__topdown__v02.png", "/ABS/evidence/qa/Q00N/full-1/012-hud-first-fight.png"],
+  "ui-title": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/ui/preview/shots/title.png", "/ABS/evidence/qa/Q00N/full-1/001-title.png"],
+  "ui-pick": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/ui/preview/shots/hex.png", "/ABS/evidence/qa/Q00N/full-1/006-pick1-armed.png"],
+  "ui-hud": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/ui/preview/shots/hud.png", "/ABS/evidence/qa/Q00N/full-2/012-hud-first-fight.png"],
+  "ui-pause": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/ui/preview/shots/pause.png", "/ABS/evidence/qa/Q00N/full-1/013-pause.png"],
+  "ui-boss": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/ui/preview/shots/boss.png", "/ABS/evidence/qa/Q00N/boss-2/028-boss-low.png"],
+  "ui-death": ["/Users/huangjifeng/Desktop/1/arpg-command-center/assets/ui/preview/shots/death.png", "/ABS/evidence/qa/Q00N/death-1/027-death-1.9s.png"]
+}

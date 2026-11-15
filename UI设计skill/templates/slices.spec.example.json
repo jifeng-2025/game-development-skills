@@ -1,0 +1,25 @@
+{
+  "tints": { "dark": "#141414", "light": "#EEEEEE", "alert": "#C03030", "accent": "#A88A50" },
+  "items": [
+    { "id": "S01", "src": "title/key-art__v01.png",      "kind": "T", "box": [2800, 1120] },
+    { "id": "S02", "src": "title/seal__v01.png",         "kind": "T", "box": [320, 320] },
+    { "id": "S03", "src": "menu/btn-normal__v01.png",    "kind": "K", "box": [720, 128],  "tints": ["dark", "light"], "fit": "height" },
+    { "id": "S04", "src": "menu/btn-selected__v01.png",  "kind": "K", "box": [720, 128],  "tints": ["dark", "light"], "fit": "height", "fill": 40 },
+    { "id": "S05", "src": "hud/hp-track__v01.png",       "kind": "K", "box": [960, 80],   "tints": ["light"], "fit": "height" },
+    { "id": "S06", "src": "hud/hp-fill__v01.png",        "kind": "K", "box": [928, 56],   "tints": ["alert", "dark"], "fit": "height" },
+    { "id": "S07", "src": "hud/res-empty__v01.png",      "kind": "K", "box": [56, 68],    "tints": ["light"] },
+    { "id": "S08", "src": "hud/res-full__v01.png",       "kind": "T", "box": [56, 68] },
+    { "id": "S09", "src": "hud/skill-ring__v01.png",     "kind": "T", "box": [192, 192] },
+    { "id": "S10", "src": "hud/cd-mask__v01.png",        "kind": "K", "box": [192, 192],  "tints": ["dark"], "fill": true },
+    { "id": "S11", "src": "hud/badge__v01.png",          "kind": "T", "box": [56, 56] },
+    { "id": "S12", "src": "hud/keycap__v01.png",         "kind": "T", "box": [144, 44],   "fit": "height" },
+    { "id": "S13", "src": "boss/boss-frame__v01.png",    "kind": "K", "box": [1920, 72],  "tints": ["light"], "fit": "height" },
+    { "id": "S14", "src": "boss/nameplate__v01.png",     "kind": "K", "box": [1120, 104], "tints": ["dark"], "fit": "height" },
+    { "id": "S15", "src": "subtitle/bar__v01.png",       "kind": "K", "box": [2304, 160], "tints": ["dark", "light"], "fit": "height" },
+    { "id": "S16", "src": "cards/card-frame__v01.png",   "kind": "T", "box": [680, 1000] },
+    { "id": "S17", "src": "cards/stripe__v01.png",       "kind": "K", "box": [560, 80],   "tints": ["dark", "alert", "accent"], "fit": "height" },
+    { "id": "S18", "src": "transition/bloom__v01.png",   "kind": "K", "box": [2048, 2048], "tints": ["dark"], "fill": true },
+    { "id": "S19", "src": "death/vignette__v01.png",     "kind": "K", "box": [3840, 2160], "tints": ["dark"], "fit": "stretch" },
+    { "id": "S20", "src": "pause/card__v01.png",         "kind": "T", "box": [1120, 1280] }
+  ]
+}

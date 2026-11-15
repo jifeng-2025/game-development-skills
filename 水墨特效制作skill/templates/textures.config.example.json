@@ -1,0 +1,27 @@
+{
+  "game": "../game",
+  "source": "../concepts",
+  "output": "../game/assets/art/vfx",
+  "tsOut": "../game/assets/vfx/textures.ts",
+  "guidNamespace": "mygame/vfx/texture/",
+  "model": "built-in imagegen",
+  "entries": [
+    ["slash", "vfx-slash-arc", "front", "01", 1],
+    ["slash-wide", "vfx-slash-arc-wide", "front", "01", 1],
+    ["line", "vfx-slash-line", "front", "01", 1],
+    ["splat", "vfx-ink-splat", "seq", "01", 4],
+    ["burst", "vfx-ink-burst-ring", "front", "01", 1],
+    ["shockwave", "vfx-shockwave-ring", "front", "01", 1],
+    ["fan", "vfx-telegraph-fan", "front", "01", 1],
+    ["ring", "vfx-telegraph-ring", "front", "01", 1],
+    ["noise", "vfx-noise-ink", "tile", "01", 1],
+    ["mist", "vfx-mist-wisp", "sheet", "01", 2],
+    ["spark", "vfx-spark", "sheet", "01", 2]
+  ],
+  "noiseKeys": ["noise"],
+  "thicken": { "line": 1.8, "slash": 1.5, "slash-wide": 1.5, "mist-00": 1.8, "mist-01": 1.8, "mist-02": 1.8 },
+  "pad": 4,
+  "closeRadius": 6,
+  "hullRadius": 30,
+  "edgeTaper": 3
+}

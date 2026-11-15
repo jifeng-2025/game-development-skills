@@ -1,0 +1,24 @@
+{
+  "statsGlobal": "__vfxStats",
+  "viewGlobal": "__gameView",
+  "sendGlobal": "__gameSend",
+  "start": {
+    "advanceKey": "Enter",
+    "pickKey": "Digit2",
+    "fightPhase": "fight",
+    "pickPhaseRe": "^hex",
+    "advancePhases": ["title", "lines"],
+    "afterStart": [{ "t": "god", "on": true }, { "t": "auto", "on": true }]
+  },
+  "targets": [
+    { "name": "ignite", "kind": "ignite", "requireZero": ["skillCast"], "noSubtitle": true,
+      "beats": [["flame-ignite-a", 500], ["flame-ignite-b", 1100]] },
+    { "name": "burst", "kind": "burnBurst", "noSubtitle": true,
+      "beats": [["flame-burst-a", 110], ["flame-burst-b", 360]] },
+    { "name": "attack-bolts", "kind": "bolt", "minDelta": 2, "maxDelta": 5,
+      "beats": [["gear-attack-bolts-a", 80], ["gear-attack-bolts-b", 200]] },
+    { "name": "e-volley", "kind": "bolt", "minDelta": 6,
+      "beats": [["gear-e-volley-a", 90], ["gear-e-volley-b", 240]] }
+  ],
+  "timeoutMs": 90000
+}

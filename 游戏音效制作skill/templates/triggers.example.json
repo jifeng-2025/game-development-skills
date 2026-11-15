@@ -1,0 +1,5 @@
+{
+  "slash-1": "attack step=1",
+  "hit": "hit crit=false（source≠enemy）",
+  "ui-move": "title 阶段 W/S/↑/↓"
+}

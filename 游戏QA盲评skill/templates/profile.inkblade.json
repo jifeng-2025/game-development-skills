@@ -1,0 +1,35 @@
+{
+  "$comment": "墨刃 inkblade @37955da 的 QA profile。换游戏：先跑 probe-state.mjs 看页面暴露了哪些全局与字段，再逐项改。fields 左边是 qa-run.mjs 用的逻辑名，右边是游戏快照里的真实键名；游戏没有的字段删掉即可（脚本按 undefined 处理）。",
+  "stateGlobal": "__inkView",
+  "sendGlobal": "__inkSend",
+  "autoOn": { "t": "auto", "on": true },
+  "autoOff": { "t": "auto", "on": false },
+  "uiRoot": "#ui-stage",
+  "skinVarPrefix": "--skin-",
+  "errorPageRegex": "AppError|app-system-update-failed|Unable to start",
+  "startFailRegex": "Unable to start the game",
+  "fields": {
+    "phase": "phase", "room": "room", "wave": "wave", "hp": "hp", "kills": "kills", "meter": "ink",
+    "x": "x", "z": "z", "pick": "hex", "rank": "rank", "line": "line",
+    "subtitle": "subtitle", "speaker": "subtitleWho", "teach": "teach", "banner": "banner",
+    "holdLine": "holdLine", "transition": "transition", "exitOpen": "exitOpen",
+    "bossHp": "bossHp", "bossHalf": "bossHalf", "sceneEvent": "treeAsh", "endingStep": "endingStep",
+    "paused": "paused", "god": "god", "auto": "auto"
+  },
+  "logKeys": ["phase", "room", "line", "subtitle", "subtitleWho", "teach", "banner", "bossHalf", "treeAsh", "endingStep", "dialog", "holdLine", "hex", "rank"],
+  "phases": { "title": "title", "lines": "lines", "fight": "fight", "dead": "dead", "ending": "ending", "bossCue": "bossCue", "pick": ["hex", "hexMid", "hex2"] },
+  "keys": {
+    "confirm": "Enter", "pause": "Escape", "god": "F2", "skipToBoss": "F4",
+    "move": ["KeyW", "KeyS", "KeyD", "KeyA"],
+    "skills": { "q": "KeyQ", "e": "KeyE", "ult": "KeyR" }
+  },
+  "pick": { "cardSelector": ".ui-hex-card", "armedClass": "is-armed", "idAttr": "data-hex", "confirmTwice": true },
+  "exits": [[0, -2.15], [0, 60.5], [0, -56]],
+  "holdRoom": 1,
+  "holdSeconds": 15,
+  "bossRoom": 2,
+  "bossMaxHp": 220,
+  "bossManualFrac": 0.35,
+  "meterFull": 5,
+  "endingDoneStep": 2
+}

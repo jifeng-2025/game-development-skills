@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>UI 切图拼装预览</title>
+<style>
+/* ===== 设计令牌 ===== */
+:root{
+  /* 换成项目色板。dark=深色主色 light=浅色主色 alert=警示色 accent=点缀色 */
+  --dark:#141414; --light:#EEEEEE; --alert:#C03030; --accent:#A88A50;
+  --alert-glow:rgba(192,48,48,.9); --dim:rgba(10,10,10,.62); --dim-soft:rgba(10,10,10,.28); --placeholder:#2a2a2a;
+  --card-text:var(--dark);  /* 卡片字色：浅色卡框用 --dark，深色卡框改 --light */
+  --font: "Songti SC",serif;
+  --in: 250ms cubic-bezier(.2,.7,.2,1);   /* 出现 */
+  --out: 200ms ease-in;                    /* 消失 */
+}
+*{box-sizing:border-box;margin:0}
+body{background:#222;color:var(--light);font-family:var(--font)}
+nav{position:fixed;top:8px;right:8px;z-index:99;display:flex;gap:6px}
+nav button{font:14px sans-serif;padding:4px 10px}
+#stage{position:relative;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;
+  background:#111 url(bg.png) center/cover}
+.screen{position:absolute;inset:0;display:none}
+.screen.on{display:block;animation:fadeIn var(--in) both}
+@keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.dim{position:absolute;inset:0;background:var(--dim)}
+.txt{text-shadow:0 0 6px rgba(0,0,0,.9),0 0 2px #000}
+
+/* ===== 标题 + 主菜单 ===== */
+#ui-title .slash{position:absolute;left:260px;top:250px;width:1400px;height:459px;background:url(../export/title/key-art.png) center/contain no-repeat}
+#ui-title h1{position:absolute;left:0;right:0;top:330px;text-align:center;font-size:260px;line-height:1;letter-spacing:.12em;color:var(--light);font-weight:400}
+#ui-title .seal{position:absolute;left:1390px;top:560px;width:96px;height:96px;background:url(../export/title/seal.png) center/contain no-repeat}
+#ui-title .sub{position:absolute;left:0;right:0;top:640px;text-align:center;font-size:34px;letter-spacing:.3em}
+#ui-menu{position:absolute;left:50%;top:730px;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;width:420px}
+.ui-menu-item{position:relative;height:64px;line-height:64px;padding-left:72px;font-size:40px;letter-spacing:.2em;color:var(--light);
+  border:0 solid transparent;border-width:0 40px;border-image:url(../export/menu/btn-normal-dark.png) 0 30% 0 30% fill / 0 40px stretch;opacity:.85}
+.ui-menu-item.is-selected{border-image-source:url(../export/menu/btn-selected-dark.png);opacity:1}
+.ui-menu-item.is-selected::before{content:"";position:absolute;left:-14px;top:24px;width:56px;height:16px;
+  background:url(../export/hud/hp-fill-alert.png) left/100% 100% no-repeat;animation:dash 150ms ease-out both}
+@keyframes dash{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.ui-menu-item.is-disabled{opacity:.35}
+
+/* ===== HUD ===== */
+#ui-hud-hp{position:absolute;left:40px;top:36px;width:480px;height:40px;
+  border:0 solid transparent;border-width:0 48px;border-image:url(../export/hud/hp-track-light.png) 0 12% 0 12% fill / 0 48px stretch;opacity:.85}
+#ui-hud-hp .fill{position:absolute;left:-40px;right:-40px;top:6px;height:28px;
+  border:0 solid transparent;border-width:0 30px;border-image:url(../export/hud/hp-fill-alert.png) 0 6% 0 6% fill / 0 30px stretch;
+  clip-path:inset(0 calc(100% - var(--hp,70%)) 0 0);transition:clip-path 180ms ease-out}
+#ui-hud-res{position:absolute;left:52px;top:88px;display:flex;gap:10px}
+.ui-res-pip{width:28px;height:34px;background:url(../export/hud/res-empty-light.png) center/contain no-repeat;opacity:.55}
+.ui-res-pip.is-full{background-image:url(../export/hud/res-full.png);opacity:1}
+#ui-hud-res.is-max .ui-res-pip{animation:breathe 1.2s ease-in-out infinite}
+@keyframes breathe{50%{filter:drop-shadow(0 0 0 var(--alert)) drop-shadow(0 0 5px var(--alert-glow))}}
+#ui-hud-skills{position:absolute;right:48px;bottom:48px;display:flex;gap:22px;align-items:flex-end}
+.ui-skill{position:relative;width:80px;height:80px;background:url(../export/hud/skill-ring.png) center/contain no-repeat}
+.ui-skill.is-ult{width:96px;height:96px}
+.ui-skill.is-locked{opacity:.5}
+.ui-skill .icon{position:absolute;inset:22%;display:grid;place-items:center;font-size:30px;color:var(--light)}
+.ui-skill .cd{position:absolute;inset:0;background:url(../export/hud/cd-mask-dark.png) center/contain no-repeat;opacity:.75;
+  clip-path:inset(calc(100% - var(--cd,0%)) 0 0 0)}
+.ui-skill .key{position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);width:44px;height:22px;
+  background:url(../export/hud/keycap.png) center/100% 100%;color:var(--dark);font:700 14px/22px sans-serif;text-align:center}
+.ui-skill .key.wide{width:72px}
+.ui-skill .badge{position:absolute;right:-6px;top:-6px;width:30px;height:30px;background:url(../export/hud/badge.png) center/contain no-repeat;
+  color:var(--light);font-size:18px;line-height:30px;text-align:center;animation:stamp 200ms ease-out both}
+@keyframes stamp{from{transform:scale(1.4);opacity:0}to{transform:none;opacity:1}}
+#ui-subtitle{position:absolute;left:50%;bottom:216px;transform:translateX(-50%);width:1152px;height:80px;line-height:80px;text-align:center;font-size:34px;
+  border:0 solid transparent;border-width:0 160px;border-image:url(../export/subtitle/bar-dark.png) 0 22% 0 22% fill / 0 160px stretch}
+#ui-subtitle b{color:var(--accent);font-weight:400;margin-right:.6em}
+#ui-teach{position:absolute;left:50%;top:640px;transform:translateX(-50%);font-size:40px;letter-spacing:.2em}
+
+/* ===== Boss ===== */
+#ui-boss{position:absolute;left:50%;top:28px;transform:translateX(-50%);width:960px;text-align:center}
+#ui-boss .name{display:inline-block;height:52px;line-height:52px;padding:0 40px;font-size:30px;letter-spacing:.15em;
+  border:0 solid transparent;border-width:0 90px;border-image:url(../export/boss/nameplate-dark.png) 0 25% 0 25% fill / 0 90px stretch}
+#ui-boss .name small{font-size:20px;opacity:.8;margin-left:.6em}
+#ui-boss .bar{position:relative;height:36px;margin-top:6px;border:0 solid transparent;border-width:0 40px;
+  border-image:url(../export/boss/boss-frame-light.png) 0 6% 0 6% fill / 0 40px stretch}
+#ui-boss .bar i{position:absolute;left:-28px;right:-28px;top:9px;height:18px;border:0 solid transparent;border-width:0 24px;
+  border-image:url(../export/hud/hp-fill-dark.png) 0 6% 0 6% fill / 0 24px stretch;clip-path:inset(0 calc(100% - var(--hp,40%)) 0 0)}
+#ui-boss .bar i{filter:drop-shadow(0 0 1px var(--light))}  /* 深色填充压暗场景会看不见，必须带浅色细边 */
+#ui-boss.is-enraged .bar i{border-image-source:url(../export/hud/hp-fill-alert.png)}
+
+/* ===== 三选一 ===== */
+#ui-cards h2{position:absolute;white-space:nowrap;left:50%;top:110px;transform:translateX(-50%);font-size:64px;font-weight:400;letter-spacing:.2em;color:var(--dark);
+  padding:0 140px;line-height:110px;border:0 solid transparent;border-width:0 120px;border-image:url(../export/subtitle/bar-light.png) 0 22% 0 22% fill / 0 120px stretch}
+.ui-card-row{position:absolute;left:0;right:0;top:270px;display:flex;justify-content:center;gap:56px}
+.ui-card-card{position:relative;width:340px;height:520px;color:var(--card-text);text-align:center;transition:transform var(--in);
+  border:0 solid transparent;border-width:150px 36px 60px;border-image:url(../export/cards/card-frame.png) 30% 12% 12% 12% fill / 150px 36px 60px stretch}
+.ui-card-card::before{content:"";position:absolute;inset:-150px -90px -100px;z-index:-1;background:url(../export/transition/bloom-dark.png) center/contain no-repeat;opacity:0;transition:opacity var(--in)}
+.ui-card-card.is-hover{transform:scale(1.06)}
+.ui-card-card.is-hover::before{opacity:.45}
+.ui-card-card.is-armed{transform:scale(1.08)}
+.ui-card-card .emb{position:absolute;left:50%;top:-118px;transform:translateX(-50%);width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:40px;color:var(--light)}
+.ui-card-card h3{margin-top:-10px;font-size:36px;font-weight:400}
+.ui-card-card p{margin-top:10px;font-size:24px;line-height:1.3}
+.ui-card-card .pv{margin:14px auto 0;width:220px;height:124px;border:1px solid var(--accent);background:var(--placeholder)}
+.ui-card-card .stripe{position:absolute;left:10px;right:10px;bottom:-34px;height:40px;line-height:40px;font-size:22px;color:var(--light);background:center/100% 100% no-repeat}
+.ui-card-card[data-kind=a] .stripe{background-image:url(../export/cards/stripe-dark.png)}
+.ui-card-card[data-kind=b] .stripe{background-image:url(../export/cards/stripe-alert.png)}
+.ui-card-card[data-kind=c] .stripe{background-image:url(../export/cards/stripe-accent.png);color:var(--dark)}
+.ui-card-card .upgrade{position:absolute;right:-18px;top:-30px;width:60px;height:60px;background:url(../export/title/seal.png) center/contain no-repeat;color:var(--light);font-size:18px;line-height:60px}
+.ui-card-hint{position:absolute;left:0;right:0;top:900px;text-align:center;font-size:26px}
+.ui-card-hint .k{display:inline-block;width:32px;height:22px;line-height:22px;margin:0 4px;background:url(../export/hud/keycap.png) center/100% 100%;color:var(--dark);font:700 14px/22px sans-serif}
+
+/* ===== 转场 / 暂停 / 死亡 ===== */
+#ui-transition .bloom{position:absolute;left:50%;top:50%;width:2400px;height:2400px;margin:-1200px;background:url(../export/transition/bloom-dark.png) center/contain no-repeat;animation:bloom 400ms ease-out both}
+@keyframes bloom{from{transform:scale(.05)}to{transform:scale(1)}}
+#ui-transition .room{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);writing-mode:vertical-rl;font-size:120px;letter-spacing:.2em}
+#ui-transition .seal{position:absolute;left:50%;top:calc(50% + 170px);width:48px;height:48px;margin-left:-24px;background:url(../export/title/seal.png) center/contain no-repeat}
+#ui-pause .card{position:absolute;left:50%;top:50%;width:560px;height:640px;transform:translate(-50%,-50%);color:var(--dark);padding:40px 20px;
+  border:0 solid transparent;border-width:90px;border-image:url(../export/pause/card.png) 14% fill / 90px stretch}
+#ui-pause .ui-menu-item{color:var(--dark);border-image-source:url(../export/menu/btn-normal-light.png);margin:0 auto 6px;width:380px;padding-left:64px;white-space:nowrap}
+#ui-pause .ui-menu-item.is-selected{border-image-source:url(../export/menu/btn-selected-light.png)}
+#stage.is-dead{filter:grayscale(1) brightness(.75)}  /* 去色加在游戏画布上（canvas.style.filter），不要用 backdrop-filter */
+#ui-death .gray{display:none}
+#ui-death .vig{position:absolute;inset:0;background:url(../export/death/vignette-dark.png) center/100% 100%,url(../export/death/vignette-dark.png) center/100% 100%;animation:fadeIn 600ms ease-out both}
+#ui-death h1{position:absolute;left:0;right:0;top:400px;text-align:center;font-size:160px;font-weight:400}
+#ui-death p{position:absolute;left:0;right:0;text-align:center;font-size:30px}
+</style>
+</head>
+<body>
+<nav>
+  <button data-s="title">标题</button><button data-s="hud">HUD</button><button data-s="boss">Boss</button>
+  <button data-s="cards">三选一</button><button data-s="trans">转场</button><button data-s="pause">暂停</button><button data-s="death">死亡</button>
+</nav>
+<div id="stage">
+  <section class="screen" id="s-title"><div class="dim" style="background:var(--dim-soft)"></div>
+    <div id="ui-title"><div class="slash"></div><h1 class="txt">游戏名</h1><div class="seal"></div><div class="sub txt">一句副标题</div></div>
+    <div id="ui-menu">
+      <div class="ui-menu-item is-selected txt">开始</div><div class="ui-menu-item is-disabled txt">继续</div>
+      <div class="ui-menu-item txt">设置</div><div class="ui-menu-item txt">退出</div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-hud">
+    <div id="ui-hud-hp" style="--hp:70%"><div class="fill"></div></div>
+    <div id="ui-hud-res"><i class="ui-res-pip is-full"></i><i class="ui-res-pip is-full"></i><i class="ui-res-pip is-full"></i><i class="ui-res-pip"></i><i class="ui-res-pip"></i></div>
+    <div id="ui-teach" class="txt">战斗横幅</div>
+    <div id="ui-subtitle" class="txt"><b>说话人</b>一句叙事台词。</div>
+    <div id="ui-hud-skills">
+      <div class="ui-skill" id="ui-hud-q" style="--cd:50%"><div class="icon">Q</div><div class="cd"></div><div class="key">Q</div></div>
+      <div class="ui-skill" id="ui-hud-e"><div class="icon">E</div><div class="badge">!</div><div class="key">E</div></div>
+      <div class="ui-skill is-ult is-locked" id="ui-hud-ult"><div class="icon">R</div><div class="key">R</div></div>
+      <div class="ui-skill" id="ui-hud-dash"><div class="icon">⇧</div><div class="key wide">Space</div></div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-boss">
+    <div id="ui-boss" class="is-enraged" style="--hp:42%"><div class="name txt">Boss 名<small>身份</small></div><div class="bar"><i></i></div></div>
+    <div id="ui-subtitle" class="txt"><b>Boss 名</b>半血台词。</div>
+  </section>
+
+  <section class="screen" id="s-cards"><div class="dim"></div>
+    <div id="ui-cards"><h2>选择一项强化</h2>
+      <div class="ui-card-row">
+        <div class="ui-card-card" data-kind="a"><div class="emb">A</div><h3>强化 A</h3><p>一句效果说明</p><div class="pv"></div><div class="stripe">流派 A</div></div>
+        <div class="ui-card-card is-hover" data-kind="b"><div class="emb">B</div><h3>强化 B</h3><p>一句效果说明</p><div class="pv"></div><div class="stripe">流派 B</div><div class="upgrade">升级</div></div>
+        <div class="ui-card-card" data-kind="c"><div class="emb">C</div><h3>强化 C</h3><p>一句效果说明</p><div class="pv"></div><div class="stripe">流派 C</div></div>
+      </div>
+      <div class="ui-card-hint txt"><span class="k">1</span><span class="k">2</span><span class="k">3</span> 选择 · 再按一次确认</div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-trans"><div id="ui-transition"><div class="bloom"></div><div class="room txt">房间名</div><div class="seal"></div></div></section>
+
+  <section class="screen" id="s-pause"><div class="dim"></div>
+    <div id="ui-pause"><div class="card">
+      <div class="ui-menu-item is-selected">继续</div><div class="ui-menu-item">重新开始</div><div class="ui-menu-item">设置</div><div class="ui-menu-item">回标题</div>
+    </div></div>
+  </section>
+
+  <section class="screen" id="s-death">
+    <div id="ui-death"><div class="gray"></div><div class="vig"></div><h1 class="txt">失败</h1>
+      <p class="txt" style="top:600px">本局统计</p><p class="txt" style="top:660px;font-size:26px;opacity:.8">Enter 重新开始 / Esc 回标题</p></div>
+  </section>
+</div>
+<script>
+const stage=document.getElementById('stage');
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`scale(${s})`}
+addEventListener('resize',fit);fit();
+function show(id){document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('on',e.id==='s-'+id));stage.classList.toggle('is-dead',id==='death')}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+const only=new URLSearchParams(location.search).get('s');
+if(only)document.querySelector('nav').style.display='none';  /* 截图时隐藏切屏按钮，否则和实机对比多出差异 */
+show(only||'hud');
+</script>
+</body>
+</html>

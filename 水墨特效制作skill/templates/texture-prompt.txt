@@ -1,0 +1,23 @@
+game VFX texture, pure white ink brush element on pure black background, high contrast, brightness will be used as alpha, {STYLE_ENERGY}, single element centered with margin, nothing cut off
+
+{ELEMENT_DESCRIPTION}
+
+pure black background (#000000), white only, monochrome
+
+Output aspect and requested resolution: {ASPECT}. Generate exactly one image.
+References: style references only for brush energy. For VFX, ignore reference colors and use white/grayscale on black.
+Do not include: photorealistic, photograph, fine noisy detail, tiny scattered brush specks, text, letters, watermark, signature, logo, frame, border, colors, gradient background
+
+--- element description examples (one asset per prompt) ---
+slash arc:      one crescent-shaped sword slash arc made of a single thick calligraphy brush stroke, thick at the start, tapering to a sharp dry-brush tail with flying white streaks, arc spans about 150 degrees
+straight line:  one straight horizontal brush stroke, thick body, dry-brush ends   (used for Q lines, cracks, walls, dash traces → THICKEN it)
+splat sequence: 4x4 grid of ink splat frames growing then scattering, same scale per cell, wide margin per cell
+burst ring:     one ink burst ring, thick irregular brush circle with outward splashes, hollow centre
+shockwave:      one thin fast brush ring, even width, hollow
+telegraph fan:  one filled fan/wedge shape painted with layered washes, apex at the bottom centre, about 96 degrees open
+telegraph ring: one filled circle painted with layered washes, darker edge band
+mist sheet:     2x2 grid of vertical rising ink-smoke wisps   (thin threads → THICKEN)
+spark sheet:    2x2 grid of small sharp sparks / embers
+noise tile:     seamless tileable organic ink-cloud noise, varied grey values from black to white, soft wet edges, for dissolve masks  (replace "white only" with "grayscale", ask for seamless edge to edge)
+
+File naming: <asset>/<asset>__<view>__v<NN>.png, view ∈ front | seq | sheet | tile; keep the prompt next to it as .prompt.txt.
