@@ -24,4 +24,13 @@
 
 文件夹使用中文名称；`SKILL.md` 中的英文 `name` 保留原始标识，方便识别来源。目录引用已同步更新为中文名称。
 
-这些流程源于墨刃项目，多项引擎接入步骤依赖 ForgeaX，使用其他引擎时需调整。原有实测结论和未验证项保留在 [原始项目审核记录](./原始项目审核记录.md)，本次上传未重新运行游戏、素材生成或端到端验收。
+## 关于 ForgeAX
+
+多项引擎接入步骤依赖 [ForgeAX（天工引擎）](https://forgeax.github.io/zh/)。ForgeAX 是一款 **AI Native（AI 原生）的 TypeScript 游戏引擎**，以 AI Agent 为第一用户：从数据、API 到工具链，都围绕让 AI 理解系统、编写代码、检查运行结果和修复问题来设计。
+
+引擎提供基于 WebGPU 的渲染、ECS 游戏逻辑、2D/3D 物理、骨骼动画、音频和资产管线，并通过 CLI 串联项目创建、运行、检查与打包。AI 可以查询运行中的实体、检查渲染帧、获取截图和测试结果，用实际运行证据推进迭代。
+
+你可以在 Codex、Cursor、Claude Code 等 AI 编程工具中接入 ForgeAX，把游戏想法逐步做成可玩的作品。本仓库的 skills 为其中的美术、UI、特效、音效、协作与验收环节提供可复用流程；使用其他引擎时，可保留通用方法并调整引擎相关步骤。
+
+了解更多：[官网](https://forgeax.github.io/zh/) · [官方教程](https://forgeax.github.io/tutorials/) · [引擎源码](https://github.com/ForgeAX/forgeax-engine)
+
